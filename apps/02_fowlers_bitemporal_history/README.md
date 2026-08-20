@@ -1,4 +1,4 @@
-# Bitemporal history — Sally's salary
+# Fowler's bitemporal history — Sally's salary
 
 This code example reproduces Sally's case from Martin Fowler's
 [Bitemporal History](https://martinfowler.com/articles/bitemporal-history.html) article. Sally is paid

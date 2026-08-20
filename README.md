@@ -39,7 +39,7 @@ Exercises: [persistent projections](https://docs.funes.org/recipes/materializati
 [transactional projections](https://docs.funes.org/concepts/projection/#persistence-tiers-for-projections) ·
 [actual time attribute](https://docs.funes.org/recipes/bi-temporal-event-streams/)
 
-### [Sally's bitemporal salary history](apps/02_bitemporal_history/)
+### [Fowler's bitemporal history — Sally's salary](apps/02_fowlers_bitemporal_history/)
 
 Reproduces Sally's case from Martin Fowler's [Bitemporal History](https://martinfowler.com/articles/bitemporal-history.html)
 article: a retroactive raise and its later correction, queried along both record time and actual time.
