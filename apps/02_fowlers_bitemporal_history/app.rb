@@ -81,28 +81,30 @@ class EmployeeHistoryEventStreamTest < ActiveSupport::TestCase
     end
   end
 
-  def materialized_projection(record_date, actual_date)
+  # Fowler's sally.salaryAt(actualDate, recordDate)
+  def salary_at(actual_date, record_date)
     EmployeeHistoryEventStream
       .for("sally")
       .projected_with(SalaryStateProjection, as_of: record_date, at: actual_date)
+      .monthly_salary
   end
 
   describe "Sally's actual history as seen from each record date" do
     test "on feb 25 payroll still sees 6000 because the feb 15 raise has not been reported yet" do
-      assert_equal 6000, materialized_projection(Date.new(2021, 2, 25), Date.new(2021, 1, 25)).monthly_salary
-      assert_equal 6000, materialized_projection(Date.new(2021, 2, 25), Date.new(2021, 2, 25)).monthly_salary
+      assert_equal 6000, salary_at(Date.new(2021, 1, 25), Date.new(2021, 2, 25))
+      assert_equal 6000, salary_at(Date.new(2021, 2, 25), Date.new(2021, 2, 25))
     end
 
     test "the raise reported on mar 15 retroactively rewrites actual history back to feb 15" do
-      assert_equal 6000, materialized_projection(Date.new(2021, 3, 25), Date.new(2021, 1, 25)).monthly_salary
-      assert_equal 6500, materialized_projection(Date.new(2021, 3, 25), Date.new(2021, 2, 25)).monthly_salary
-      assert_equal 6500, materialized_projection(Date.new(2021, 3, 25), Date.new(2021, 3, 25)).monthly_salary
+      assert_equal 6000, salary_at(Date.new(2021, 1, 25), Date.new(2021, 3, 25))
+      assert_equal 6500, salary_at(Date.new(2021, 2, 25), Date.new(2021, 3, 25))
+      assert_equal 6500, salary_at(Date.new(2021, 3, 25), Date.new(2021, 3, 25))
     end
 
     test "the apr 5 correction supersedes the raise with 6400 and leaves january untouched" do
-      assert_equal 6000, materialized_projection(Date.new(2021, 4, 25), Date.new(2021, 1, 25)).monthly_salary
-      assert_equal 6400, materialized_projection(Date.new(2021, 4, 25), Date.new(2021, 2, 25)).monthly_salary
-      assert_equal 6400, materialized_projection(Date.new(2021, 4, 25), Date.new(2021, 3, 25)).monthly_salary
+      assert_equal 6000, salary_at(Date.new(2021, 1, 25), Date.new(2021, 4, 25))
+      assert_equal 6400, salary_at(Date.new(2021, 2, 25), Date.new(2021, 4, 25))
+      assert_equal 6400, salary_at(Date.new(2021, 3, 25), Date.new(2021, 4, 25))
     end
   end
 end
