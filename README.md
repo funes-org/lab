@@ -30,7 +30,7 @@ CI runs the full suite on every push and pull request, alongside RuboCop and bun
 Each entry highlights the specific concepts it applies, so if you are interested in a
 particular subject it can be found at a glance.
 
-### [01_simple_persistent_projection](apps/01_simple_persistent_projection/) — Simple debt persistent projection modeling
+### [Simple debt persistent projection modeling](apps/01_simple_persistent_projection/)
 
 A simplified debt balance tracker: debts are issued and paid through events, and their current
 state (outstanding balance, status, key dates) is materialized into a persistent projection.
@@ -38,3 +38,11 @@ state (outstanding balance, status, key dates) is materialized into a persistent
 Exercises: [persistent projections](https://docs.funes.org/recipes/materialization-models/persistent/) ·
 [transactional projections](https://docs.funes.org/concepts/projection/#persistence-tiers-for-projections) ·
 [actual time attribute](https://docs.funes.org/recipes/bi-temporal-event-streams/)
+
+### [Sally's bitemporal salary history](apps/02_bitemporal_history/)
+
+Reproduces Sally's case from Martin Fowler's [Bitemporal History](https://martinfowler.com/articles/bitemporal-history.html)
+article: a retroactive raise and its later correction, queried along both record time and actual time.
+
+Exercises: [bi-temporal event streams](https://docs.funes.org/recipes/bi-temporal-event-streams/) ·
+[virtual projections](https://docs.funes.org/recipes/materialization-models/virtual/)
