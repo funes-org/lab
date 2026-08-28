@@ -46,3 +46,12 @@ article: a retroactive raise and its later correction, queried along both record
 
 Exercises: [bi-temporal event streams](https://docs.funes.org/recipes/bi-temporal-event-streams/) ·
 [virtual projections](https://docs.funes.org/recipes/materialization-models/virtual/)
+
+### [Historical product prices — one stream, many database rows](apps/03_historical_product_prices/)
+
+A SKU's pricing history: each `PriceSet` event covers a price period, and a custom persistence
+hook materializes one row per period — a Type 2 Slowly Changing Dimension flavored table,
+queryable for the price at any date.
+
+Exercises: [custom persistence destinations](https://docs.funes.org/recipes/materialization-models/persistent/#custom-destination) ·
+[transactional projections](https://docs.funes.org/concepts/projection/#persistence-tiers-for-projections)
