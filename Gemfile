@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Provides Active Record and friends for the single-file apps
-gem "rails", "~> 8.1.3"
+gem "rails", "~> 8.1.4"
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", ">= 2.1"
 
